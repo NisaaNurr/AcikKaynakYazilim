@@ -37,7 +37,7 @@ class Name(Resource):
                 return {'data' : entry}, 200
         return {'message' : 'İlin hava durumu bilgisi bulunamadı ! '}, 404
 # Add URL endpoints
-api.add_resource(Users, '/havadurumu')
+api.add_resource(havadurumu, '/havadurumu')
 api.add_resource(il, '/<string:il>')
 
 
