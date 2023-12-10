@@ -12,12 +12,12 @@ class Users(Resource):
         return {'data' : data}, 200
 
     def post(self):
-        il=request.args['il']
+        il=request.args['İl']
         sıcaklık=request.args['sıcaklık']
         havadurumu=request.args['havadurumu']
 
         req_data = pd.DataFrame({
-            'il'    : ['il'],
+            'İl'    : ['İl'],
             'sıcaklık'    : ['sıcaklık'],
             'havadurumu'      : ['havadurmu']
 
@@ -39,7 +39,7 @@ class Name(Resource):
         return {'message' : 'İlin hava durumu bilgisi bulunamadı ! '}, 404
 # Add URL endpoints
 api.add_resource(havadurumu, '/users')
-api.add_resource(il, '/<string:il>')
+api.add_resource(İl, '/<string:İl>')
 
 
 if __name__ == '__main__':
