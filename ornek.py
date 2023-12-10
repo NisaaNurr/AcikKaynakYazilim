@@ -27,7 +27,6 @@ class Users(Resource):
         data.to_csv('users.csv', index=False)
         return {'message': 'Record successfully added.'}, 200
 
-
 class Name(Resource):
     def get(self, name):
         data = pd.read_csv('havadurumu.csv')
