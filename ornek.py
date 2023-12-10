@@ -11,7 +11,7 @@ class Users(Resource):
         data = data.to_dict('records')
         return {'data': data}, 200
 
-	data = pd.read_csv('havadurumu.csv')
+        data = pd.read_csv('havadurumu.csv')
 
     def post(self):
         il = request.args['il']
