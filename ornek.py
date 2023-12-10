@@ -12,35 +12,34 @@ class Users(Resource):
         return {'data': data}, 200
 
     def post(self):
-        Il = request.args['Il']
-        Sicaklik = request.args['Sicaklik']
+        il = request.args['il']
+        sicaklik = request.args['sicaklik']
         havadurumu = request.args['havadurumu']
 
-	data = pd.read_csv('havadurumu.csv')
-
-        new_data = pd.DataFrame({
-            'Il': [Il],
-            'Sicaklikk': [Sicaklik],
+        req_data = pd.DataFrame({
+            'il': [il],
+            'sicaklikk': [sicaklik],
             'havadurumu': [havadurumu]
         })
 
+	data = pd.read_csv('havadurumu.csv')
         data = data.append(req_data, ignore_index=True)
-        data.to_csv('havadurumu.csv', index=False)
+        data.to_csv('users.csv', index=False)
         return {'message': 'Record successfully added.'}, 200
 
 
-class Il(Resource):
-    def get(self, Il):
+class Name(Resource):
+    def get(self, name):
         data = pd.read_csv('havadurumu.csv')
         data = data.to_dict('records')
         for entry in data:
-            if entry['Il'] == Il:
+            if entry['name'] == name:
                 return {'data': entry}, 200
         return {'message': 'Ilin hava durumu bilgisi bulunamadı!'}, 404
 
 # Add URL endpoints
 api.add_resource(Users, '/users')
-api.add_resource(Name, '/<string:Il>')
+api.add_resource(il, '/<string:il>')
 
 if __name__ == '__main__':
    app.run(host="0.0.0.0",port=6767)
