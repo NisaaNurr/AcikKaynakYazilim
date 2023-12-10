@@ -11,18 +11,19 @@ class Users(Resource):
         data = data.to_dict('records')
         return {'data': data}, 200
 
+	data = pd.read_csv('havadurumu.csv')
+
     def post(self):
         il = request.args['il']
         sicaklik = request.args['sicaklik']
         havadurumu = request.args['havadurumu']
 
-        req_data = pd.DataFrame({
+        new_data = pd.DataFrame({
             'il': [il],
             'sicaklikk': [sicaklik],
             'havadurumu': [havadurumu]
         })
-	data = pd.read_csv('havadurumu.csv')
-        data = data.append(req_data, ignore_index=True)
+        data = data.append(new_data, ignore_index=True)
         data.to_csv('users.csv', index=False)
         return {'message': 'Record successfully added.'}, 200
 
@@ -34,7 +35,7 @@ class Name(Resource):
         for entry in data:
             if entry['name'] == name:
                 return {'data': entry}, 200
-        return {'message': 'Ilin hava durumu bilgisi bulunamadı!'}, 404
+        return {'message': 'ilin hava durumu bilgisi bulunamadı!'}, 404
 
 # Add URL endpoints
 api.add_resource(Users, '/users')
