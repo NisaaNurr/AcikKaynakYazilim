@@ -35,7 +35,7 @@ class Il(Resource):
         for entry in data:
             if entry['il'] == il:
                 return {'data': entry}, 200
-        return {'message': 'ilin havadurumu bilgileri bulunamadi')}, 404
+        return {'message': 'ilin havadurumu bilgileri bulunamadi'}, 404
 
 # Add URL endpoints
 api.add_resource(Havadurumu, '/havadurumu')
