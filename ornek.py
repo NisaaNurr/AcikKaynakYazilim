@@ -21,7 +21,6 @@ class Users(Resource):
             'sicaklikk': [sicaklik],
             'havadurumu': [havadurumu]
         })
-
 	data = pd.read_csv('havadurumu.csv')
         data = data.append(req_data, ignore_index=True)
         data.to_csv('users.csv', index=False)
@@ -42,5 +41,5 @@ api.add_resource(Users, '/users')
 api.add_resource(il, '/<string:il>')
 
 if __name__ == '__main__':
-   app.run(host="0.0.0.0",port=6767)
-   app.run()
+    app.run(host="0.0.0.0",port=6767)
+    app.run()
