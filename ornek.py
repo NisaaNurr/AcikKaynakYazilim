@@ -5,7 +5,7 @@ import pandas as pd
 app = Flask(__name__)
 api = Api(app)
 
-class havadurumu(Resource):
+class Users(Resource):
     def get(self):
         data = pd.read_csv('havadurumu.csv')
         data = data.to_dict('records')
@@ -20,24 +20,25 @@ class havadurumu(Resource):
             'il'    : ['il'],
             'sıcaklık'    : ['sıcaklık'],
             'havadurumu'      : ['havadurmu']
+
         })
-        data = pd.read_csv('havadurumu.csv')
+        data = pd.read_csv('users.csv')
         #data = pd.concat([data, req_data], ignore_index=True)
         data=data.append(req_data,ignore_index=True)
-        data.to_csv('havadurumu.csv', index=False)
+        data.to_csv('users.csv', index=False)
         return {'message' : 'Record successfully added.'}, 200
 
 
-class il(Resource):
-    def get(self,il):
+class Name(Resource):
+    def get(self,name):
         data = pd.read_csv('havadurumu.csv')
         data = data.to_dict('records')
         for entry in data:
-            if entry['il'] == il :
+            if entry['name'] == name :
                 return {'data' : entry}, 200
         return {'message' : 'İlin hava durumu bilgisi bulunamadı ! '}, 404
 # Add URL endpoints
-api.add_resource(havadurumu, '/havadurumu')
+api.add_resource(havadurumu, '/users')
 api.add_resource(il, '/<string:il>')
 
 
